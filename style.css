@@ -84,6 +84,23 @@ form button {
 form button:hover {
   background-color: #326cb0;
 }
+.social-icons {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.social-icons a {
+  font-size: 24px;
+  margin: 0 15px;
+  color: #4a90e2;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #265e9f;
+}
+
 
 main {
   padding: 20px;
@@ -97,5 +114,6 @@ footer {
   background: #4a90e2;
   color: white;
 }
+
 
 
