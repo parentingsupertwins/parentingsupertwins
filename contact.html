@@ -4,14 +4,30 @@
 <body>
   <header><h1>Contact Us</h1><nav><!-- nav --></nav></header>
   <main>
-    <form>
-      <label>Name: <input type="text" /></label><br>
-      <label>Email: <input type="email" /></label><br>
-      <label>Message: <textarea></textarea></label><br>
-      <button type="submit">Send</button>
-    </form>
+   <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+  <label>
+    Name:
+    <input type="text" name="name" required />
+  </label><br>
+  <label>
+    Email:
+    <input type="email" name="email" required />
+  </label><br>
+  <label>
+    Message:
+    <textarea name="message" required></textarea>
+  </label><br>
+  <button type="submit">Send</button>
+      <input type="hidden" name="form-name" value="contact" />
+<p style="display:none">
+  <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+</p>
+
+</form>
+
   </main>
   <footer><a href="https://parentingsupertwins.com/">&copy; 2025 Parenting SuperTwins</a></footer>
 </body>
 </html>
+
 
