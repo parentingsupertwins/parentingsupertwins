@@ -92,7 +92,7 @@ form button:hover {
 .social-icons a {
   font-size: 24px;
   margin: 0 15px;
-  color: #4a90e2;
+  color: #ffffff;
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -114,6 +114,7 @@ footer {
   background: #4a90e2;
   color: white;
 }
+
 
 
 
