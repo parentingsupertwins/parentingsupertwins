@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A blog homepage with articles displayed as clickable images.">
+    <meta name="author" content="Your Name">
+    <title>Your Blog - Articles</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        /* Header Styling */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        /* Article Grid */
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .article-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: scale(1.05);
+        }
+
+        .article-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .article-card .title-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-indent: 10px; /* Slight indentation for title */
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        footer a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .article-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Your Blog</h1>
+        <p>Explore our latest articles by clicking the images below.</p>
+    </header>
+
+    <main>
+        <div class="article-grid">
+            <!-- Article 1 -->
+            <a href="article1.html" class="article-card">
+                <img src="path/to/article1-image.jpg" alt="Article 1 Topic">
+                <div class="title-overlay">Article 1: [Your Topic]</div>
+            </a>
+
+            <!-- Article 2 -->
+            <a href="article2.html" class="article-card">
+                <img src="path/to/article2-image.jpg" alt="Article 2 Topic">
+                <div class="title-overlay">Article 2: [Another Topic]</div>
+            </a>
+
+            <!-- Article 3 -->
+            <a href="article3.html" class="article-card">
+                <img src="path/to/article3-image.jpg" alt="Article 3 Topic">
+                <div class="title-overlay">Article 3: [Another Topic]</div>
+            </a>
+
+            <!-- Add more articles as needed -->
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Your Blog Name. All rights reserved. | 
+           <a href="mailto:your.email@example.com">Contact Us</a> | 
+           <a href="/about">About</a>
+        </p>
+    </footer>
+</body>
+</html>
