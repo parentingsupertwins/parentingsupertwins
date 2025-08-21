@@ -1,53 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Slider</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simple Image Slider</title>
   <style>
+    :root { --btn-bg: rgba(0,0,0,0.6); }
+    * { box-sizing: border-box; }
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #f5f5f5;
+      margin: 0; min-height: 100vh; display: grid; place-items: center;
+      background: #f5f5f5; font-family: system-ui, Arial, sans-serif;
     }
-
     .slider {
       position: relative;
-      width: 400px;
-      height: 250px;
+      width: min(90vw, 520px);
+      aspect-ratio: 16/10;        /* keeps a nice proportion */
       overflow: hidden;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.15);
+      background: #ddd;
     }
-
     .slides {
       display: flex;
-      transition: transform 0.5s ease-in-out;
-      width: 100%;
+      height: 100%;
+      will-change: transform;
+      transition: transform .45s ease;
+    }
+    /* Each slide takes exactly the width of the slider */
+    .slides a {
+      flex: 0 0 100%;
       height: 100%;
     }
-
     .slides img {
-      width: 400px;
-      height: 250px;
-      object-fit: cover;
-      cursor: pointer;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;          /* fills the box nicely */
     }
-
     .btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(0,0,0,0.6);
-      color: white;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-      font-size: 18px;
+      border: 0;
+      width: 42px; height: 42px;
       border-radius: 50%;
+      background: var(--btn-bg);
+      color: #fff;
+      font-size: 20px;
+      line-height: 42px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
     }
-
-    .btn.left { left: 10px; }
+    .btn:focus { outline: 2px solid #fff; outline-offset: 2px; }
+    .btn.left  { left: 10px; }
     .btn.right { right: 10px; }
+  </style>
+</head>
+<body>
+
+  <div class="slider" id="slider">
+    <div class="slides" id="slides">
+      <!-- Make each image clickable by wrapping in <a> -->
+      <a href="https://example.com/1" target="_blank" rel="noopener">
+        <img src="https://picsum.photos/id/1015/800/500" alt="Slide 1">
+      </a>
+      <a href="https://example.com/2" target="_blank" rel="noopener">
+        <img src="https://picsum.photos/id/1025/800/500" alt="Slide 2">
+      </a>
+      <a href="https://example.com/3" target="_blank" rel="noopener">
+        <img src="https://picsum.photos/id/1035/800/500" alt="Slide 3">
+      </a>
+    </div>
+
+    <button class="btn left"  id="prev" aria-label="Previous slide">&#10094;</button>
+    <button class="btn right" id="next" aria-label="Next slide">&#10095;</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slider = document.getElementById('slider');
+      const slides = document.getElementById('slides');
+      const items  = slides.querySelectorAll('a');
+      const prev   = document.getElementById('prev');
+      const next   = document.getElementById('next');
+
+      let index = 0;
+      let slideWidth = slider.clientWidth;
+
+      function setWidths() {
+        // Each slide must exactly match the slider width (for precise px transforms)
+        slideWidth = slider.clientWidth;
+        items.forEach(el => { el.style.width = slideWidth + 'px'; });
+        goTo(index, false);
+      }
+
+      function goTo(i, animate = true) {
+        index = (i + items.length) % items.length; // wrap-around
+        if (!animate) slides.style.transition = 'none';
+        slides.style.transform = `translateX(-${index * slideWidth}px)`;
+        if (!animate) requestAnimationFrame(() => {
+          slides.style.transition = 'transform .45s ease';
+        });
+      }
+
+      prev.addEventListener('click', () => goTo(index - 1));
+      next.addEventListener('click', () => goTo(index + 1));
+      window.addEventListener('resize', setWidths);
+
+      setWidths(); // initial sizing
+    });
+  </script>
+</body>
+</html>
