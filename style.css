@@ -4,6 +4,7 @@ body {
   color: #333;
   margin: 0;
   padding: 0;
+  aspect-ratio: 16/10;  
 }
 
 header {
@@ -11,6 +12,7 @@ header {
   color: white;
   padding: 20px;
   text-align: center;
+  aspect-ratio: 16/10;  
 }
 
 nav ul {
@@ -106,6 +108,7 @@ main {
   padding: 20px;
   max-width: 800px;
   margin: auto;
+  aspect-ratio: 16/10;  
 }
 
 footer {
@@ -113,7 +116,9 @@ footer {
   padding: 10px;
   background: #4a90e2;
   color: white;
+  aspect-ratio: 16/10;  
 }
+
 
 
 
