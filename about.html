@@ -1,29 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>About - Parenting SuperTwins</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Columns with Links</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8f8f8;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 20px;
+      color: #333;
+    }
+
+    /* Responsive column layout */
+    .columns {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .col {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .col:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .col img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .col a {
+      display: block;
+      padding: 15px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      transition: color 0.2s ease;
+    }
+
+    .col a:hover {
+      color: #0077cc;
+    }
+
+    /* Media queries for extra responsiveness */
+    @media (max-width: 768px) {
+      h1 { font-size: 22px; }
+      .col img { height: 160px; }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 20px; }
+      .col img { height: 140px; }
+      .col a { font-size: 14px; padding: 10px; }
+    }
+  </style>
 </head>
 <body>
-  <header><h1>About Us</h1><header>
-    <h1>Parenting SuperTwins</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="articles.html">Articles & Tips</a></li>
-        <li><a href="resources.html">Resources</a></li>
-        <li><a href="community.html">Community</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header><nav><!-- same nav as above --></nav></header>
-  <main>
-    <p>Parenting SuperTwins was created to support parents navigating the unique journey of raising twins. We share real-life stories, expert advice, and community connection.</p>
-  </main>
-  <footer><a href="https://parentingsupertwins.com/">&copy; 2025 Parenting SuperTwins</a></footer>
+
+  <h1>Our Categories</h1>
+
+  <div class="columns">
+    <div class="col">
+      <a href="https://example.com/link1">
+        <img src="https://picsum.photos/id/1015/400/250" alt="Link 1">
+        Category One
+      </a>
+    </div>
+    <div class="col">
+      <a href="https://example.com/link2">
+        <img src="https://picsum.photos/id/1025/400/250" alt="Link 2">
+        Category Two
+      </a>
+    </div>
+    <div class="col">
+      <a href="https://example.com/link3">
+        <img src="https://picsum.photos/id/1035/400/250" alt="Link 3">
+        Category Three
+      </a>
+    </div>
+    <div class="col">
+      <a href="https://example.com/link4">
+        <img src="https://picsum.photos/id/1045/400/250" alt="Link 4">
+        Category Four
+      </a>
+    </div>
+  </div>
+
 </body>
 </html>
-
-
