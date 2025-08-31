@@ -1,9 +1,9 @@
 body {
-  width 100%;
+  width auto;
   font-family: sans-serif;
   background: #f5faff;
   color: #333;
-  margin: 0;
+  margin: auto;
   padding: 0;
   aspect-ratio: 16/10;  
 }
@@ -120,6 +120,7 @@ footer {
   color: white;
   aspect-ratio: 16/10;  
 }
+
 
 
 
