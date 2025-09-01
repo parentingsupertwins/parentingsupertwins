@@ -1,243 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Parenting SuperTwins</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Gallery with Navbar</title>
   <style>
-    :root { --btn-bg: rgba(0,0,0,0.6); }
-    * { box-sizing: border-box; }
     body {
-      margin: 0; min-height: 100vh; display: grid; place-items: center;
-      background: #f5f5f5; font-family: system-ui, Arial, sans-serif;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8f8f8;
     }
-    .slider {
-      position: relative;
-      width: min(90vw, 520px);
-      aspect-ratio: 16/10;        /* keeps a nice proportion */
-      overflow: hidden;
-      border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.15);
-      background: #ddd;
-    }
-    .slides {
+
+    /* 🔹 Navbar */
+    .navbar {
       display: flex;
-      height: 100%;
-      will-change: transform;
-      transition: transform .45s ease;
+      justify-content: space-between;
+      align-items: center;
+      background: #333;
+      padding: 15px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    /* Each slide takes exactly the width of the slider */
-    .slides a {
-      flex: 0 0 100%;
-      height: 100%;
-    }
-    .slides img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;          /* fills the box nicely */
-    }
-    .btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      border: 0;
-      width: 42px; height: 42px;
-      border-radius: 50%;
-      background: var(--btn-bg);
+    .navbar .logo {
       color: #fff;
       font-size: 20px;
-      line-height: 42px;
-      text-align: center;
-      cursor: pointer;
-      user-select: none;
+      font-weight: bold;
+      text-decoration: none;
     }
-    .btn:focus { outline: 2px solid #fff; outline-offset: 2px; }
-    .btn.left  { left: 10px; }
-    .btn.right { right: 10px; }
-    .columns {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    .navbar ul {
+      list-style: none;
+      display: flex;
       gap: 20px;
-      padding: 20px;
-      max-width: 1200px;
-      margin: auto;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    .navbar ul li a:hover {
+      text-decoration: underline;
     }
 
-    .col {
-      background: white;
+    /* 🔹 Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .hamburger span {
+      height: 3px;
+      width: 25px;
+      background: #fff;
+      margin: 4px 0;
+      border-radius: 2px;
+    }
+
+    /* 🔹 Gallery */
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 15px;
+    }
+    .big-image a,
+    .small-images a {
+      display: block;
+    }
+    .big-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      transition: transform 0.2s ease;
+    }
+    .small-images {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .small-images img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      text-align: center;
-      overflow: hidden;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.2s ease;
+    }
+    .small-images img:hover,
+    .big-image img:hover {
+      transform: scale(1.03);
     }
 
-    .col:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    }
+    /* 🔹 Responsive */
+    @media (max-width: 768px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+      .small-images img {
+        height: 200px;
+      }
 
-    .col img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .col a {
-      display: block;
-      padding: 15px;
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      transition: color 0.2s ease;
-    }
-
-    .col a:hover {
-      color: #0077cc;
+      .navbar ul {
+        display: none;
+        flex-direction: column;
+        background: #333;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        width: 200px;
+        border-radius: 8px;
+        padding: 10px 0;
+      }
+      .navbar ul.show {
+        display: flex;
+      }
+      .hamburger {
+        display: flex;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Parenting SuperTwins</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">newborn</a></li>
-        <li><a href="articles.html">Infants</a></li>
-        <li><a href="blog.html">Toddlers</a></li>
-        <li><a href="resources.html">PreSchooler</a></li>
-        <li><a href="schooler.html">Schooler</a></li>
-        <li><a href="Teenager.html">Teenagerr</a></li>
-        <li><a href="community.html">Community</a></li>
-        <li><a href="contact.html">Contact</a></li>
-         <li><a href="FunRead.html">Fun Reads</a></li>
-        
-       
 
-      </ul>
-    </nav>
-  </header>
-  <main>
-<head>
-  
-<h1> <div class="slider" id="slider">
-    <div class="slides" id="slides">
-      <!-- Make each image clickable by wrapping in <a> -->
-      <a href="https://example.com/1" target="_blank" rel="noopener">
-        <img src="https://picsum.photos/id/1015/800/500" alt="Slide 1">
-      </a>
-      <a href="https://example.com/2" target="_blank" rel="noopener">
-        <img src="https://picsum.photos/id/1025/800/500" alt="Slide 2">
-      </a>
-      <a href="https://example.com/3" target="_blank" rel="noopener">
-        <img src="https://picsum.photos/id/1035/800/500" alt="Slide 3">
-      </a>
+  <!-- 🔹 Navbar -->
+  <nav class="navbar">
+    <a href="#" class="logo">MyGallery</a>
+    <ul id="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Gallery</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- 🔹 Gallery -->
+  <div class="gallery">
+
+    <!-- Row 1 -->
+    <div class="row">
+      <div class="big-image">
+        <a href="#"><img src="https://picsum.photos/id/1015/600/600" alt="Big 1"></a>
+      </div>
+      <div class="small-images">
+        <a href="#"><img src="https://picsum.photos/id/1025/400/300" alt="Small 1"></a>
+        <a href="#"><img src="https://picsum.photos/id/1035/400/300" alt="Small 2"></a>
+        <a href="#"><img src="https://picsum.photos/id/1045/400/300" alt="Small 3"></a>
+      </div>
     </div>
 
-    <button class="btn left"  id="prev" aria-label="Previous slide">&#10094;</button>
-    <button class="btn right" id="next" aria-label="Next slide">&#10095;</button>
+    <!-- Row 2 -->
+    <div class="row">
+      <div class="big-image">
+        <a href="#"><img src="https://picsum.photos/id/1055/600/600" alt="Big 2"></a>
+      </div>
+      <div class="small-images">
+        <a href="#"><img src="https://picsum.photos/id/1065/400/300" alt="Small 4"></a>
+        <a href="#"><img src="https://picsum.photos/id/1075/400/300" alt="Small 5"></a>
+        <a href="#"><img src="https://picsum.photos/id/1085/400/300" alt="Small 6"></a>
+      </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="row">
+      <div class="big-image">
+        <a href="#"><img src="https://picsum.photos/id/1095/600/600" alt="Big 3"></a>
+      </div>
+      <div class="small-images">
+        <a href="#"><img src="https://picsum.photos/id/1105/400/300" alt="Small 7"></a>
+        <a href="#"><img src="https://picsum.photos/id/1115/400/300" alt="Small 8"></a>
+        <a href="#"><img src="https://picsum.photos/id/1125/400/300" alt="Small 9"></a>
+      </div>
+    </div>
+
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const slider = document.getElementById('slider');
-      const slides = document.getElementById('slides');
-      const items  = slides.querySelectorAll('a');
-      const prev   = document.getElementById('prev');
-      const next   = document.getElementById('next');
+    function toggleMenu() {
+      document.getElementById("nav-links").classList.toggle("show");
+    }
+  </script>
 
-      let index = 0;
-      let slideWidth = slider.clientWidth;
-
-      function setWidths() {
-        // Each slide must exactly match the slider width (for precise px transforms)
-        slideWidth = slider.clientWidth;
-        items.forEach(el => { el.style.width = slideWidth + 'px'; });
-        goTo(index, false);
-      }
-
-      function goTo(i, animate = true) {
-        index = (i + items.length) % items.length; // wrap-around
-        if (!animate) slides.style.transition = 'none';
-        slides.style.transform = `translateX(-${index * slideWidth}px)`;
-        if (!animate) requestAnimationFrame(() => {
-          slides.style.transition = 'transform .45s ease';
-        });
-      }
-
-      prev.addEventListener('click', () => goTo(index - 1));
-      next.addEventListener('click', () => goTo(index + 1));
-      window.addEventListener('resize', setWidths);
-
-      setWidths(); // initial sizing
-    });
-  </script> </h1>
-  <h2> <div class="columns">
-    <div class="col">
-      <a href="https://example.com/link1">
-        <img src="https://picsum.photos/id/1015/400/250" alt="Link 1">
-        Category One
-      </a>
-    </div>
-    <div class="col">
-      <a href="https://example.com/link2">
-        <img src="https://picsum.photos/id/1025/400/250" alt="Link 2">
-        Category Two
-      </a>
-    </div>
-    <div class="col">
-      <a href="https://example.com/link3">
-        <img src="https://picsum.photos/id/1035/400/250" alt="Link 3">
-        Category Three
-      </a>
-    </div>
-    <div class="col">
-      <a href="https://example.com/link4">
-        <img src="https://picsum.photos/id/1045/400/250" alt="Link 4">
-        Category Four
-      </a>
-    </div>
-  </div> </h2>
-  
-    <h2>Supportive Resources for Raising Twins with Confidence</h2>
-    <p>Welcome to Parenting SuperTwins — your trusted guide to everything twin parenting. From pregnancy to toddlerhood, we're here to help.</p>
-  <h2> <div class="columns">
-    <div class="col">
-      <a href="https://example.com/link1">
-        <img src="https://picsum.photos/id/1015/400/250" alt="Link 1">
-        Category One
-      </a>
-    </div>
-    <div class="col">
-      <a href="https://example.com/link2">
-        <img src="https://picsum.photos/id/1025/400/250" alt="Link 2">
-        Category Two
-      </a>
-    </div>
-    <div class="col">
-      <a href="https://example.com/link3">
-        <img src="https://picsum.photos/id/1035/400/250" alt="Link 3">
-        Category Three
-      </a>
-    </div>
-    <div class="col">
-      <a href="https://example.com/link4">
-        <img src="https://picsum.photos/id/1045/400/250" alt="Link 4">
-        Category Four
-      </a>
-    </div>
-  </div> </h2>
-  </main>
-  <footer><a href="https://parentingsupertwins.com/">&copy; 2025 Parenting SuperTwins</a></footer>
 </body>
 </html>
-
-
-
-
-
 
