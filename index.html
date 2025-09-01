@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Gallery with Navbar</title>
+  <title>Responsive Gallery with Footer</title>
+  <!-- ✅ Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
       margin: 0;
@@ -102,6 +104,73 @@
       transform: scale(1.03);
     }
 
+    /* 🔹 Footer */
+    footer {
+      background: #222;
+      color: #ddd;
+      padding: 40px 20px 20px;
+      margin-top: 50px;
+    }
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .footer-col h3 {
+      color: #fff;
+      margin-bottom: 15px;
+    }
+    .footer-col p, 
+    .footer-col ul {
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .footer-col ul li {
+      margin-bottom: 8px;
+    }
+    .footer-col ul li a {
+      color: #ddd;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .footer-col ul li a:hover {
+      color: #fff;
+    }
+    .social {
+      display: flex;
+      gap: 12px;
+      margin-top: 15px;
+    }
+    .social a {
+      display: inline-block;
+      background: #444;
+      color: #fff;
+      width: 38px;
+      height: 38px;
+      text-align: center;
+      line-height: 38px;
+      border-radius: 50%;
+      transition: background 0.3s, transform 0.2s;
+      font-size: 18px;
+    }
+    .social a:hover {
+      background: #f90;
+      transform: scale(1.1);
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #444;
+      font-size: 13px;
+      color: #aaa;
+    }
+
     /* 🔹 Responsive */
     @media (max-width: 768px) {
       .row {
@@ -128,6 +197,14 @@
       .hamburger {
         display: flex;
       }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .social {
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -151,8 +228,6 @@
 
   <!-- 🔹 Gallery -->
   <div class="gallery">
-
-    <!-- Row 1 -->
     <div class="row">
       <div class="big-image">
         <a href="#"><img src="https://picsum.photos/id/1015/600/600" alt="Big 1"></a>
@@ -163,32 +238,40 @@
         <a href="#"><img src="https://picsum.photos/id/1045/400/300" alt="Small 3"></a>
       </div>
     </div>
-
-    <!-- Row 2 -->
-    <div class="row">
-      <div class="big-image">
-        <a href="#"><img src="https://picsum.photos/id/1055/600/600" alt="Big 2"></a>
-      </div>
-      <div class="small-images">
-        <a href="#"><img src="https://picsum.photos/id/1065/400/300" alt="Small 4"></a>
-        <a href="#"><img src="https://picsum.photos/id/1075/400/300" alt="Small 5"></a>
-        <a href="#"><img src="https://picsum.photos/id/1085/400/300" alt="Small 6"></a>
-      </div>
-    </div>
-
-    <!-- Row 3 -->
-    <div class="row">
-      <div class="big-image">
-        <a href="#"><img src="https://picsum.photos/id/1095/600/600" alt="Big 3"></a>
-      </div>
-      <div class="small-images">
-        <a href="#"><img src="https://picsum.photos/id/1105/400/300" alt="Small 7"></a>
-        <a href="#"><img src="https://picsum.photos/id/1115/400/300" alt="Small 8"></a>
-        <a href="#"><img src="https://picsum.photos/id/1125/400/300" alt="Small 9"></a>
-      </div>
-    </div>
-
   </div>
+
+  <!-- 🔹 Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>About Us</h3>
+        <p>We provide creative gallery layouts and modern web solutions to make your website stand out.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Gallery</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <p>Email: info@mygallery.com</p>
+        <p>Phone: +91-9876543210</p>
+        <div class="social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 MyGallery. All rights reserved.
+    </div>
+  </footer>
 
   <script>
     function toggleMenu() {
@@ -198,4 +281,3 @@
 
 </body>
 </html>
-
